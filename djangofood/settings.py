@@ -14,7 +14,7 @@ SECRET_KEY = "django-insecure-dtu27rqmqm73#6dk$w%rrnnqoij%&%e2pf8sm4fjs#2ih8-#8$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["delish-delivery.onrender.com"]
 
 
 # Application definition
