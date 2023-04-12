@@ -75,20 +75,20 @@ WSGI_APPLICATION = "djangofood.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "djangofood",
-#         "USER": "postgres",
-#         "PASSWORD": "post@wako12",
-#         "HOST": "localhost",
-#         "PORT": "5432",
-#     }
-# }
-DATABASES={
-    "default": dj_database_url.parse("postgres://delish_u0j4_user:ZxlIkXX81djsMRgkTlJApNFjxmtKaSav@dpg-cgr5kqd269v4ioo02epg-a.frankfurt-postgres.render.com/delish_u0j4")
+# postgresql://postgres:73Hohfr3o7Ny6s7gAjoY@containers-us-west-78.railway.app:7847/railway
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "railway",
+        "USER": "postgres",
+        "PASSWORD": "73Hohfr3o7Ny6s7gAjoY",
+        "HOST": "containers-us-west-78.railway.app",
+        "PORT": "7847",
+    }
 }
+# DATABASES={
+#     "default": dj_database_url.parse("postgres://delish_u0j4_user:ZxlIkXX81djsMRgkTlJApNFjxmtKaSav@dpg-cgr5kqd269v4ioo02epg-a.frankfurt-postgres.render.com/delish_u0j4")
+# }
 STORAGES = {
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",

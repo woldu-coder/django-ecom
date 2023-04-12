@@ -1,0 +1,1 @@
+web: gunicorn djangofood.wsgi --log-file -
