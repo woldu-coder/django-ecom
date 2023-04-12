@@ -12,9 +12,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-dtu27rqmqm73#6dk$w%rrnnqoij%&%e2pf8sm4fjs#2ih8-#8$"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["delish-delivery.onrender.com"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -87,7 +87,7 @@ WSGI_APPLICATION = "djangofood.wsgi.application"
 #     }
 # }
 DATABASES={
-    "default": dj_database_url.parse("postgres://delivery_4rtw_user:S1CZSbA88BksTuqEVUk1ZH4gSwoejrLr@dpg-cgr4r4e4dadccqrbqm70-a.frankfurt-postgres.render.com/delivery_4rtw")
+    "default": dj_database_url.parse("postgres://delish_u0j4_user:ZxlIkXX81djsMRgkTlJApNFjxmtKaSav@dpg-cgr5kqd269v4ioo02epg-a.frankfurt-postgres.render.com/delish_u0j4")
 }
 STORAGES = {
     "staticfiles": {
