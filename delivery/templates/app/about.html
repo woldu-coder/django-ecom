@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+About our services
+{% endblock title %}
+
+{% block content %}
+<div class="about mt-5">
+	<center><marquee width="50%" height="10%" direction="left" loop="2">
+		
+		<h2>Welcome to our services!</h2>
+	</marquee></center>
+	<h1>Order Us</h1>
+	<div class="about1">
+
+		<div class="mt-3">
+			<img src="{% static 'images/pers1.jpg' %}" alt="Person Image">
+		</div>
+		<div class="mt-3">
+			<h3>Our services</h3>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

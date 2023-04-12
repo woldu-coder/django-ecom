@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+Not Found!
+{% endblock title %}
+
+
+{% block content %}
+	<div class="row mt-5">
+		<div class="col-lg-9">
+			<div class="card card-danger">
+				<div class="card-title ms-5">
+					<center><h1>404</h1></center><br>
+					<center><h3>Page Not Found!</h3></center>
+				</div>
+				<div class="card-body">
+					<center><p>You are not allowed to access here!</p></center>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock content %}

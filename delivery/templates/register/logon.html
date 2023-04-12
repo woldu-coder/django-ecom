@@ -1,0 +1,29 @@
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Login Here</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="{% url 'login' %}" method="post">
+            <div class="modal-body">
+                {% csrf_token %}
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-envelope"></i></span>
+                    <input type="email" class="form-control" name="email" placeholder="Email Address.." aria-label="Email Address" aria-describedby="addon-wrapping" required>
+                </div>
+            <div class="input-group flex-nowrap mt-3">
+                <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-lock"></i></span>
+                <input type="password" class="form-control" name="password" placeholder="Password" aria-label="Password" aria-describedby="addon-wrapping" required>
+            </div>
+        </div>
+        <p class="ms-5">Haven't account yet? Create new  <a href="{% url 'sign_up' %}">here</a></p>
+        <div class="modal-footer">
+
+            <button type="submit" class="btn btn-outline-primary">Login</button>
+            <button type="reset" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+        </div>
+    </form>
+      </div>
+    </div>
+</div>

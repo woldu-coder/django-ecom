@@ -1,0 +1,294 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{% block title %}{% endblock title %}</title>
+	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	<link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		var user = '{{request.user}}'
+
+		function getToken(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = cookies[i].trim();
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getToken('csrftoken')
+
+		function getCookie(name) {
+		    // Split cookie string and get all individual name=value pairs in an array
+		    var cookieArr = document.cookie.split(";");
+
+		    // Loop through the array elements
+		    for(var i = 0; i < cookieArr.length; i++) {
+		        var cookiePair = cookieArr[i].split("=");
+
+		        /* Removing whitespace at the beginning of the cookie name
+		        and compare it with the given string */
+		        if(name == cookiePair[0].trim()) {
+		            // Decode the cookie value and return
+		            return decodeURIComponent(cookiePair[1]);
+		        }
+		    }
+
+		    // Return null if not found
+		    return null;
+		}
+		var cart = JSON.parse(getCookie('cart'))
+
+		if (cart == undefined){
+			cart = {}
+			console.log('Cart Created!', cart)
+			document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+		}
+		console.log('Cart:', cart)
+	
+	</script>
+</head>
+<body>
+
+	{% if page != "signup" %}
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-2">
+      <div class="container">
+        <a class="navbar-brand" href="/">Delish Delivery</a>
+        <button type="button" class="navbar-toggler ms-5" data-bs-toggle="collapse" data-bs-target="#menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+			<a class="nav-link active" href="{% url 'home' %}">Home</a>
+		</li>
+
+		<li class="nav-item">
+			<a href="{% url 'about' %}" class="nav-link active">About</a>
+		</li>
+		{% if groups %}
+		{% for group in groups %}
+			{% if group == 'Admin' %}
+				<li class="nav-item">
+					<a href="/admin" class="nav-link active">Admin</a>
+				</li>
+
+			{% endif %}
+			{% if group == 'Employee' %}
+				<li class="nav-item">
+					<a href="{% url 'add_product' %}" class="nav-link active">Add Product</a>
+				</li>
+				{% if order %}
+				<li class="nav-item">
+					<a href="{% url 'add_product' %}" class="nav-link active">Notification
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+  					<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+						</svg>
+					</a>
+				</li>
+				{% endif %}
+			{% endif %}
+			{% if group == 'Customer' %}
+				<li class="nav-item">
+					<a href="{% url 'store' %}" class="nav-link active">Store</a>
+				</li>
+			{% endif %}
+		{% endfor %}
+		{% endif %}
+		</ul>
+		<ul class="navbar-nav ms-auto">
+			{% if request.user.is_authenticated %}
+				<li class="nav-item">
+					<a href="{% url 'store' %}" id="get-started" class="btn btn-outline-primary me-2">Get Started</a>
+				</li>
+				<li class="nav-item drop-profile">
+					<div class="prof-image mt-2">
+					<a href="{{request.user.profile_picture.url}}"><img src="{{request.user.profile_picture.url}}" class="profile"></a>
+					</div>
+					<ul class="dropped-list">
+						<li class="nav-item">
+							<a href="" class="nav-link text-dark bg-white active">
+								<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person-lock" viewBox="0 0 16 16">
+									<path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 5.996V14H3s-1 0-1-1 1-4 6-4c.564 0 1.077.038 1.544.107a4.524 4.524 0 0 0-.803.918A10.46 10.46 0 0 0 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h5ZM9 13a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-2Zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1Z"/>
+								</svg>
+							{{request.user.username}} Profile </a>
+						</li>
+						<li class="nav-item">
+							<a href="{% url 'reset_password' %}" class="nav-link text-dark bg-white">
+							<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-unlock-fill" viewBox="0 0 16 16">
+							  <path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z"/>
+							</svg>
+							Change Password</a>
+						</li>
+						<li class="nav-item">
+							<a href="{% url 'logout' %}" class="nav-link text-dark bg-white">
+								<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+							  <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+							</svg>
+							Logout</a>
+						</li>
+					</ul>
+				</li>
+
+			{% else %}
+			  <!-- Modal -->
+				  <li class="nav-item">
+					<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+				  </li>
+
+				{% include 'register/logon.html' %}
+
+			{% endif %}
+				<a href="{% url 'cart_list' %}">
+					<img  id="cart-icon" src="{% static 'images/cart.png' %}">
+				</a>
+			<p id="cart-total">{{cartItems}}</p>
+
+		</ul>
+		
+	</div>
+	</nav>
+{% endif %}
+
+	
+		{% block content %}
+
+		{% endblock content %}
+
+	{% if page != "signup" %}
+
+<div class="container mt-5">
+		<center><h2 class="cont">Contacts and Addresses</h2></center>
+		<div class="contact mb-5 ms-5">
+			<div class="left-contact">
+				<label class="d-flex m-3"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-phone ms-3 me-4" viewBox="0 0 16 16">
+  						<path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z"/>
+  						<path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+						</svg>
+						<h5>(+251) 92 939 3675</h5>
+				</label>
+				<label class="d-flex m-3"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-telephone-plus ms-3 me-4" viewBox="0 0 16 16">
+  				<path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+  				<path fill-rule="evenodd" d="M12.5 1a.5.5 0 0 1 .5.5V3h1.5a.5.5 0 0 1 0 1H13v1.5a.5.5 0 0 1-1 0V4h-1.5a.5.5 0 0 1 0-1H12V1.5a.5.5 0 0 1 .5-.5z"/>
+				</svg>
+						<h5>(+251) 19 143 2335</h5>
+				</label>
+				<label class="d-flex m-3"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-envelope ms-3 me-4" viewBox="0 0 16 16">
+  				<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+				</svg>
+						<h5>woldugizaw7@gmail.com</h5>
+				</label>
+			
+				<form method="post" action="{% url 'message' %}">
+					{% csrf_token %}
+					<div class="input-group mb-3">
+						<input type="email" class="form-control" name="email" value="{{request.user.email}}" placeholder="Email Address" disabled>
+					</div>
+					<div class="input-group mb-3">
+						<input type="tel" class="form-control" name="phone" value="{{request.user.phone_number}}" placeholder="Phone Number" disabled>
+					</div>
+					<div class="input-group mb-3">
+						<textarea name="message" class="form-control" placeholder="Leave a message"></textarea>
+					</div>
+					
+					<div class="d-grid gap-2">
+  						<button class="btn btn-outline-primary" type="submit">Send</button>
+					</div>
+				</form>
+			</div>
+			<div class="container">
+		        <div class="row map">
+		          <div class="col-md-12">
+		            {{map|safe}}
+		          </div>
+		        </div>
+        
+     		 </div>
+		</div>
+	</div>
+	 <!-- ======= Footer ======= -->
+  <footer id="footer">
+  		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="1" d="M0,192L34.3,213.3C68.6,235,137,277,206,272C274.3,267,343,213,411,208C480,203,549,245,617,229.3C685.7,213,754,139,823,96C891.4,53,960,43,1029,69.3C1097.1,96,1166,160,1234,186.7C1302.9,213,1371,203,1406,197.3L1440,192L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z"></path></svg>
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6">
+            <div class="footer-info">
+              <h3>Delish Delivery</h3>
+              <p class="pb-3"><em>This ia our welknown site for the delivery.</em></p>
+              <p>
+                Kezira<br>
+                01, Dire Dawa Ethiopia<br><br>
+                <strong>Phone:</strong> +251 92 939 3675<br>
+                <strong>Email:</strong>woldugizaw7@gmail.com<br>
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Food Delivery</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Every Product</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4>Our Newsletter</h4>
+            <p>You can apply to work with us whenever we are open for a vacancy.</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Delish Delivery Ltd</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">Designed by <a href="">DDU Developer.</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+
+
+{% endif %}
+
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{% static 'js/myjs.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+
+
+</body>
+</html>

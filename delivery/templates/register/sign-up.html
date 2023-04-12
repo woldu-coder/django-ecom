@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}
+Sign Up 
+{% endblock title %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="signup-page">
+    <div class="containerform">
+    	<a href="{% url 'home' %}"><i class="fa-solid fa-arrow-left"></i></a>
+        <div class="form">
+            <h2>Signup</h2>
+            <form action="" method="post">
+            	{% csrf_token %}
+
+            	{% comment %} <div class="inputBox">
+            		{{ form|crispy }}
+            		<i class="fa-solid fa-user"></i>
+            		<span>form.name</span>
+            	</div> {% endcomment %}
+                <div class="inputBox">
+                    <input type="text" name="firstname" class="firstname" required>
+                    <i class="fa-solid fa-user"></i>
+                    <span>First Name</span>
+                </div>
+                <div class="inputBox">
+                    <input type="text" name="lastname" class="lastname" required>
+                    <i class="fa-solid fa-user"></i>
+                    <span>Last Name</span>
+                </div>
+                <div class="inputBox">
+                    <input type="text" name="username" class="username" required>
+                    <i class="fa-solid fa-user"></i>
+                    <span>Username</span>
+                </div>
+                <div class="inputBox">
+                    <input type="text" name="phonenumber" class="phonenumber" required>
+                    <i class="fa-solid fa-user"></i>
+                    <span>Phone Number</span>
+                </div>
+                <div class="inputBox">
+                    <input type="email" name="email" class="email" required>
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>Email</span>
+                </div>
+                <div class="inputBox">
+                    <input type="password" name="password" required>
+                    <i class="fa-solid fa-lock"></i>
+                    <span>Password</span>
+                </div>
+                <div class="inputBox">
+                    <input type="password" name="password2" required>
+                    <i class="fa-solid fa-lock"></i>
+                    <span>Confirm Password</span>
+                </div>
+                <div class="inputBox">
+                    <input type="submit" value="Signup">
+                </div>
+                <p>Already have an account? <a href="{% url 'login' %}">Login.</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

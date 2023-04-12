@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Welcome to Our services
+{% endblock title %}
+
+{% block content %}
+
+<div class="welcome mb-4">
+	<div class="container">
+		<div class="welcome-body">
+			
+			<div class="left-welcome">
+				<img src="{% static 'images/pages/hero-img.png' %}" class="img-fluid animated">
+			</div>
+
+			<div class="right-welcome">
+				<center><h3>VISIT OUR SITES</h3></center>
+				<div class="welcome-title mt-5">
+					<h4>Order us!</h4>
+				</div>
+				<div class="welcome-detail">
+					<p>We are ready 20/7</p>
+					<a href="{% url 'store' %}" id="get-started" class="btn btn-outline-primary btn-sm">Get Started</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container mb-5 mt-3">
+
+<div class="row mt-3">
+	<div class="col-lg-12 ms-5 order">
+		<h3 class="ms-5 text-center">Order Us</h3><br>
+		{% if request.user.is_authenticated %}
+			<a href="{% url 'store' %}" class="btn btn-outline-primary ms-5">More &#x2192;</a>
+		{% endif %}
+	</div>
+	<center><br><h4>This is some of products that are found in our store!</h4>
+		{% if request.user.is_authenticated %}
+		{% else %}
+		<h5>To get more detail please login and see all our products as well as order us!</h5></center>
+		{% endif %}
+</div>
+
+{% for message in messages %}
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	{% if message.tags == "info" %}
+		<script type="text/javascript">
+			var m = "{{ message }}"
+			swal("Wrong!", m, "error");
+		</script>
+	{% endif %}
+
+{% endfor %}
+
+<div class="row">
+	{% for product in products %}
+	<div class="col-lg-4">
+		<img class="thumbnail" src="{{product.imageURL}}">
+		<div class="box-element product">
+			<h6><strong>{{product.name}}</strong></h6>
+			<hr>
+
+			<button data-product="{{product.id}}" data-action="add" class="btn btn-outline-primary add-btn update-cart">Add to Cart</button>
+			{% if groups %}
+				{% for group in groups %}
+					{% if group == 'Manager' %}
+					<button data-product="{{product.id}}" data-action="disable" class="btn btn-outline-info disable-btn" >DISABLE</button>
+					<button data-product="{{product.id}}" data-action="delete" class="btn btn-outline-danger delete-btn" >DELETE</button>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+			<h6 style="display: inline-block; float: right"><p><small>{{product.price}} birr</small></p></h6>
+
+		</div>
+	</div>
+	{% endfor %}
+	</div>
+	
+	
+</div>
+{% endblock content %}

@@ -1,0 +1,439 @@
+body{
+	background-color: hsl(0, 0%, 98%);
+}
+
+h1,h2,h3,h4,h5,h6{
+	color:hsl(0, 0%, 30%);
+}
+.nav{
+	margin-left: 200px;
+}
+#get-started{
+	border-radius: 30px;
+	font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 10px 30px;
+  border-radius: 50px;
+  transition: 0.5s;
+  color: #fff;
+  background: #1acc8d;
+}
+#get-started:hover{
+	background: #17b57d;
+}
+.box-element{
+	box-shadow:hsl(0, 0%, 80%) 0 0 16px;
+	background-color: #fff;
+	border-radius: 4px;
+	padding: 10px;
+}
+
+.thumbnail{
+	width: 100%;
+	height: 200px;
+	-webkit-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+    -moz-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+    box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+}
+
+.product{
+	border-radius: 0 0 4px 4px;
+}
+#cart-icon{
+	width:25px;
+	display: inline-block;
+	margin-left: 15px;
+}
+
+#cart-total{
+	display: block;
+	text-align: center;
+	color:#fff;
+	background-color: red;
+	width: 20px;
+	height: 25px;
+	border-radius: 50%;
+	font-size: 14px;
+}
+
+.col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12{
+	margin-top: 10px;
+}
+
+.row-image{
+	width: 100px;
+}
+
+.form-field{
+	width:250px;
+	display: inline-block;
+	padding: 5px;
+}
+
+.cart-row{
+		display: flex;
+    align-items: flex-stretch;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ececec;
+
+}
+
+.quantity{
+	display: inline-block;
+	font-weight: 700;
+	padding-right:10px;
+	
+
+}
+.chg-quantity{
+	width: 12px;
+	cursor: pointer;
+	display: block;
+	margin-top: 5px;
+	transition:.1s;
+}
+.chg-quantity:hover{
+	opacity: .6;
+}
+.hidden{
+	display: none!important;
+}
+.my-form{
+	width: 40%;
+	height: auto;
+	margin-left: 20%;
+	border-radius: 30px;
+	padding: 20px;
+	background-color: #ffd;
+}
+footer .footer-one ul{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+footer .footer-one{
+	display: grid;
+	grid-template-columns: 2fr 3fr;
+}
+svg:hover{
+	font-size: 100px;
+	color: blue;
+	transition: 2s;
+	cursor: pointer;
+}
+
+.dropped-list{
+	display: none;
+}
+.drop-profile:hover .dropped-list{
+	display: block;
+	position: fixed;
+	width: 70%;
+	margin-left: 0;
+	padding-left: 20px;
+	text-decoration: none;
+	list-style: none;
+}
+.restricted{
+	width: 50%;
+	margin-left: 10%;
+}
+
+.news{
+	width: 100%;
+	height: auto;
+	margin: 30px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.news form{
+	background-color: #ffff21;
+	margin-right: 30px;
+	border: 2px solid red;
+	border-radius: 20px;
+	position: fixed;
+}
+.contact{
+	display: flex;
+	justify-content: space-between;
+	gap: 20px;
+}
+@media screen and (max-width: 800px){
+	.contact{
+		width: 100%;
+		text-align: center;
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+}
+.prof-image{
+	width: 30px;
+	height: 30px;
+}
+.prof-image img{
+	width: 100%;
+	border-radius: 50%;
+}
+.contact-form{
+	width: 40%;
+	background-color: #fff;
+	margin-left: 30px;
+	padding-left: 20px;
+}
+.cont{
+	background-color: #fff;
+}
+.password1{
+	margin: 60px;
+	display: flex;
+	flex-direction: column;
+}
+.password1 .reset-password{
+	padding: 60px;
+	
+}
+
+.about{
+	text-align: center;
+}
+
+.about1{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+
+}
+
+@media and (min-width: 400px) and (max-width: 900px){
+	.about1{
+		display: grid;
+	grid-template-columns: 1fr;
+	}
+}
+
+.animated{
+	animation: up-down 2s ease-in-out infinite alternate-reverse both;
+}
+
+.login{
+	padding: 40px;
+	width: 100%;
+	background-color: #ffa;
+	background-image: url("../images/pages/ddhotel.jpg");
+}
+.login form{
+	width: 35%;
+	margin-left: 20%;
+	padding: 30px;
+	border: 1px solid blue;
+	border-radius: 20px;
+}
+
+
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+#footer {
+  background: #010351;
+  padding: 0 0 30px 0;
+  color: #fff;
+  font-size: 14px;
+}
+
+#footer .footer-top {
+  padding: 60px 0 30px 0;
+}
+
+#footer .footer-top .footer-info {
+  margin-bottom: 15px;
+  background: #010246;
+  color: #fff;
+  border-top: 4px solid #1acc8d;
+  text-align: center;
+  padding: 30px 20px;
+}
+
+#footer .footer-top .footer-info h3 {
+  font-size: 24px;
+  margin: 0 0 20px 0;
+  padding: 2px 0 2px 0;
+  line-height: 1;
+  font-weight: 700;
+}
+
+#footer .footer-top .footer-info p {
+  font-size: 14px;
+  line-height: 24px;
+  margin-bottom: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+#footer .footer-top .social-links a {
+  font-size: 18px;
+  display: inline-block;
+  color: #fff;
+  line-height: 1;
+  padding: 8px 0;
+  margin-right: 4px;
+  border-radius: 50%;
+  text-align: center;
+  width: 36px;
+  height: 36px;
+  transition: 0.3s;
+}
+
+#footer .footer-top .social-links a:hover {
+  background: #1acc8d;
+  color: #fff;
+  text-decoration: none;
+}
+
+#footer .footer-top h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+#footer .footer-top .footer-links {
+  margin-bottom: 30px;
+}
+
+#footer .footer-top .footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#footer .footer-top .footer-links ul i {
+  padding-right: 2px;
+  color: #61ebba;
+  font-size: 18px;
+  line-height: 1;
+}
+
+#footer .footer-top .footer-links ul li {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+#footer .footer-top .footer-links ul li:first-child {
+  padding-top: 0;
+}
+
+#footer .footer-top .footer-links ul a {
+  color: #fff;
+  transition: 0.3s;
+  display: inline-block;
+  line-height: 1;
+}
+
+#footer .footer-top .footer-links ul a:hover {
+  color: #4be8b0;
+}
+
+#footer .footer-top .footer-newsletter form {
+  margin-top: 30px;
+  background: #fff;
+  padding: 6px 10px 6px 15px;
+  position: relative;
+  border-radius: 50px;
+}
+
+#footer .footer-top .footer-newsletter form input[type=email] {
+  border: 0;
+  padding: 4px;
+  width: calc(100% - 110px);
+}
+
+#footer .footer-top .footer-newsletter form input[type=submit] {
+  position: absolute;
+  top: 0;
+  right: -2px;
+  bottom: 0;
+  border: 0;
+  background: none;
+  font-size: 16px;
+  padding: 0 20px;
+  background: #1acc8d;
+  color: #fff;
+  transition: 0.3s;
+  border-radius: 50px;
+}
+
+#footer .footer-top .footer-newsletter form input[type=submit]:hover {
+  background: #149f6e;
+}
+
+#footer .copyright {
+  border-top: 1px solid #010479;
+  text-align: center;
+  padding-top: 30px;
+}
+
+#footer .credits {
+  padding-top: 10px;
+  text-align: center;
+  font-size: 13px;
+  color: #fff;
+}
+
+@media (max-width: 575px) {
+  #footer .footer-top .footer-info {
+    margin: -20px 0 30px 0;
+  }
+}
+
+@media and (min-width: 400px) and (max-width: 900px){
+	.about1{
+		display: block;
+	}
+	.welcome-body{
+		display: block;
+	}
+}
+
+.welcome{
+	padding-top: 30px;
+	width: 100%;
+	height: 100vh;
+	background-image: url("../images/pages/ddhotel.jpg");
+	background-repeat: none;
+	background-size: cover;
+	border-radius: 50% 0 0 0;
+}
+.welcome-body{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	width: 100%;
+}
+.left-welcome{
+	width: 100%;
+	height: auto;
+}
+.left-welcome img{
+	width: 70%;
+	height: 80%;
+}
+.right-welcome h3{
+	color: white;
+}
+.welcome-detail a{
+	padding: 20px;
+	border-radius: 20px;
+}
+.order{
+	display: flex;
+	justify-content: space-between;
+}
+
+@media screen and (max-width:768px){
+	.welcome-body{
+		display: block;
+	}
+}
